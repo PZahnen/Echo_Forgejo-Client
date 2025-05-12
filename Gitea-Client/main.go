@@ -4,13 +4,28 @@ import (
 	"encoding/base64"
 	"fmt"
 	"log"
+	"os"
 
 	forgejo "codeberg.org/mvdkleijn/forgejo-sdk/forgejo/v2"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+
+    // .env-Datei laden
+    err := godotenv.Load()
+    if err != nil {
+        log.Fatalf("Error loading .env file: %v\n", err)
+    }
+
+    // Token aus Umgebungsvariablen abrufen
+    token := os.Getenv("token")
+    if token == "" {
+        log.Fatalf("Token not found in environment variables")
+    }
+
 	// Forgejo/Gitea-Client konfigurieren
-	client, err := forgejo.NewClient("https://gitea.com", forgejo.SetToken("39b183885374876f47d45cfca2e73f61b4a82457"))
+	client, err := forgejo.NewClient("https://gitea.com", forgejo.SetToken(token))
 	if err != nil {
 		log.Fatalf("Error creating Forgejo client: %v\n", err)
 	}
@@ -22,7 +37,7 @@ func main() {
 	branch := "main"
 
 	// Datei erstellen
-	createFile(client, owner, repo, branch, "example.txt", "Hello from Go! 🎉")
+	createFile(client, owner, repo, branch, "example2.txt", "Hello from Go! 🎉")
 }
 
 func createFile(client *forgejo.Client, owner, repo, branch, filePath, content string) {
