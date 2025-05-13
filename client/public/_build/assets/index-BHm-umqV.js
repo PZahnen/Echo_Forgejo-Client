@@ -1,0 +1,1 @@
+import{j as t}from"./client-CJnX4qAx.js";import{L as n,B as e}from"./index-BUtqJqcX.js";const s=function(){return t.jsxs(t.Fragment,{children:[t.jsx("div",{children:"Hello!"}),t.jsx("div",{children:t.jsx(n,{to:"/",children:t.jsx(e,{variant:"link",className:"text-blue-600 hover:text-blue-400 p-0 cursor-pointer",children:"Back"})})})]})};export{s as component};

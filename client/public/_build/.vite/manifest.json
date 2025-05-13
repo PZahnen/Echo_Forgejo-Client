@@ -1,0 +1,100 @@
+{
+  "/Users/pascal/Documents/GitHub/xtrahub-workspace/xtra-ui/dist/index.css": {
+    "file": "assets/index-DZMNOp_L.css",
+    "src": "/Users/pascal/Documents/GitHub/xtrahub-workspace/xtra-ui/dist/index.css"
+  },
+  "/Users/pascal/Documents/GitHub/xtrahub-workspace/xtrahub-ui/app/styles/app.css": {
+    "file": "assets/app-Dmsi9O-l.css",
+    "src": "/Users/pascal/Documents/GitHub/xtrahub-workspace/xtrahub-ui/app/styles/app.css"
+  },
+  "_Sidebar-BAhWtxfF.js": {
+    "file": "assets/Sidebar-BAhWtxfF.js",
+    "name": "Sidebar",
+    "imports": [
+      "_client-CJnX4qAx.js",
+      "_index-BUtqJqcX.js"
+    ]
+  },
+  "_client-CJnX4qAx.js": {
+    "file": "assets/client-CJnX4qAx.js",
+    "name": "client",
+    "dynamicImports": [
+      "app/routes/index.tsx?tsr-split=component",
+      "app/routes/exampleLink/index.tsx?tsr-split=component",
+      "app/routes/configurations/index.tsx?tsr-split=component",
+      "app/routes/deployment/$owner.$name.tsx?tsr-split=component"
+    ],
+    "assets": [
+      "assets/app-Dmsi9O-l.css",
+      "assets/index-DZMNOp_L.css"
+    ]
+  },
+  "_index-BUtqJqcX.js": {
+    "file": "assets/index-BUtqJqcX.js",
+    "name": "index",
+    "imports": [
+      "_client-CJnX4qAx.js"
+    ]
+  },
+  "_plus-CgB9mJF2.js": {
+    "file": "assets/plus-CgB9mJF2.js",
+    "name": "plus",
+    "imports": [
+      "_Sidebar-BAhWtxfF.js"
+    ]
+  },
+  "app/routes/configurations/index.tsx?tsr-split=component": {
+    "file": "assets/index-Bt16sfOq.js",
+    "name": "index",
+    "src": "app/routes/configurations/index.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_client-CJnX4qAx.js",
+      "_Sidebar-BAhWtxfF.js",
+      "_index-BUtqJqcX.js",
+      "_plus-CgB9mJF2.js"
+    ]
+  },
+  "app/routes/deployment/$owner.$name.tsx?tsr-split=component": {
+    "file": "assets/_owner._name-CD96sJAR.js",
+    "name": "_owner._name",
+    "src": "app/routes/deployment/$owner.$name.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_client-CJnX4qAx.js",
+      "_index-BUtqJqcX.js",
+      "_Sidebar-BAhWtxfF.js"
+    ]
+  },
+  "app/routes/exampleLink/index.tsx?tsr-split=component": {
+    "file": "assets/index-BHm-umqV.js",
+    "name": "index",
+    "src": "app/routes/exampleLink/index.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_client-CJnX4qAx.js",
+      "_index-BUtqJqcX.js"
+    ]
+  },
+  "app/routes/index.tsx?tsr-split=component": {
+    "file": "assets/index-vpVcr6sh.js",
+    "name": "index",
+    "src": "app/routes/index.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_client-CJnX4qAx.js",
+      "_index-BUtqJqcX.js",
+      "_Sidebar-BAhWtxfF.js",
+      "_plus-CgB9mJF2.js"
+    ]
+  },
+  "virtual:$vinxi/handler/client": {
+    "file": "assets/client-D3P5Nom6.js",
+    "name": "client",
+    "src": "virtual:$vinxi/handler/client",
+    "isEntry": true,
+    "imports": [
+      "_client-CJnX4qAx.js"
+    ]
+  }
+}

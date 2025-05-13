@@ -1,0 +1,108 @@
+package main
+
+import (
+	"embed"
+	"io/fs"
+	"log"
+	"net/http"
+	"os"
+
+	"github.com/labstack/echo/v4"
+)
+
+var embededFiles embed.FS
+
+func getFileSystem(useOS bool) http.FileSystem {
+    if useOS {
+        log.Print("using live mode")
+        return http.FS(os.DirFS("client/public"))
+    }
+
+    log.Print("using embed mode")
+    fsys, err := fs.Sub(embededFiles, "client/public")
+    if err != nil {
+        panic(err)
+    }
+
+    return http.FS(fsys)
+}
+
+func main() {
+    e := echo.New()
+
+    // API-Endpunkte
+    e.GET("/api/deployment", func(c echo.Context) error {
+        return c.JSON(http.StatusOK, deployments)
+    })
+
+    e.GET("/api/deployment/:owner/:name", func(c echo.Context) error {
+        owner := c.Param("owner")
+        name := c.Param("name")
+
+        for _, d := range deployments {
+            if d.Owner == owner && d.Name == name {
+                return c.JSON(http.StatusOK, d)
+            }
+        }
+
+        return c.JSON(http.StatusNotFound, map[string]string{"message": "Deployment not found"})
+    })
+
+    e.POST("/api/deployment", func(c echo.Context) error {
+        newDeployment := Deployment{}
+        if err := c.Bind(&newDeployment); err != nil {
+            return c.JSON(http.StatusBadRequest, map[string]string{"message": "Invalid request"})
+        }
+
+        for _, d := range deployments {
+            if d.Owner == newDeployment.Owner && d.Name == newDeployment.Name {
+                return c.JSON(http.StatusConflict, map[string]string{"message": "Deployment already exists"})
+            }
+        }
+
+        deployments = append(deployments, newDeployment)
+        return c.JSON(http.StatusCreated, newDeployment)
+    })
+
+    e.PUT("/api/deployment/:owner/:name", func(c echo.Context) error {
+        owner := c.Param("owner")
+        name := c.Param("name")
+
+        updatedDeployment := Deployment{}
+        if err := c.Bind(&updatedDeployment); err != nil {
+            return c.JSON(http.StatusBadRequest, map[string]string{"message": "Invalid request"})
+        }
+
+        for i, d := range deployments {
+            if d.Owner == owner && d.Name == name {
+                deployments[i] = updatedDeployment
+                return c.JSON(http.StatusOK, updatedDeployment)
+            }
+        }
+
+        return c.JSON(http.StatusNotFound, map[string]string{"message": "Deployment not found"})
+    })
+
+    e.DELETE("/api/deployment/:owner/:name", func(c echo.Context) error {
+        owner := c.Param("owner")
+        name := c.Param("name")
+
+        for i, d := range deployments {
+            if d.Owner == owner && d.Name == name {
+                deployments = append(deployments[:i], deployments[i+1:]...)
+                return c.JSON(http.StatusOK, map[string]string{"message": "Deployment deleted"})
+            }
+        }
+
+        return c.JSON(http.StatusNotFound, map[string]string{"message": "Deployment not found"})
+    })
+
+    // UI-Integration (muss zuletzt registriert werden)
+	useOS := len(os.Args) > 1 && os.Args[1] == "live"
+	assetHandler := http.FileServer(getFileSystem(useOS))
+	e.GET("/", echo.WrapHandler(assetHandler))
+	e.GET("/static/*", echo.WrapHandler(http.StripPrefix("/static/", assetHandler)))
+	e.Logger.Fatal(e.Start(":1323"))
+}
+
+// starten mit go run server.go live 

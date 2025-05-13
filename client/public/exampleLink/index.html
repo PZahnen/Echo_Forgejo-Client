@@ -1,0 +1,61 @@
+<!DOCTYPE html><html><head><script class='tsr-once'>const __TSR_SSR__={matches:[],streamedValues:{},initMatch:o=>(__TSR_SSR__.matches.push(o),o.extracted?.forEach(l=>{if(l.type==="stream"){let r;l.value=new ReadableStream({start(e){r={enqueue:t=>{try{e.enqueue(t)}catch{}},close:()=>{try{e.close()}catch{}}}}}),l.value.controller=r}else{let r,e;l.value=new Promise((t,a)=>{e=a,r=t}),l.value.reject=e,l.value.resolve=r}}),!0),resolvePromise:({matchId:o,id:l,promiseState:r})=>{const e=__TSR_SSR__.matches.find(t=>t.id===o);if(e){const t=e.extracted?.[l];if(t&&t.type==="promise"&&t.value&&r.status==="success")return t.value.resolve(r.data),!0}return!1},injectChunk:({matchId:o,id:l,chunk:r})=>{const e=__TSR_SSR__.matches.find(t=>t.id===o);if(e){const t=e.extracted?.[l];if(t&&t.type==="stream"&&t.value?.controller)return t.value.controller.enqueue(new TextEncoder().encode(r.toString())),!0}return!1},closeStream:({matchId:o,id:l})=>{const r=__TSR_SSR__.matches.find(e=>e.id===o);if(r){const e=r.extracted?.[l];if(e&&e.type==="stream"&&e.value?.controller)return e.value.controller.close(),!0}return!1},cleanScripts:()=>{document.querySelectorAll(".tsr-once").forEach(o=>{o.remove()})}};window.__TSR_SSR__=__TSR_SSR__;
+; if (typeof __TSR_SSR__ !== 'undefined') __TSR_SSR__.cleanScripts()</script><script class='tsr-once'>__TSR_SSR__.initMatch({"id":"/exampleLink/","__beforeLoadContext":"{}","loaderData":"{\"$undefined\":0}","error":"{\"$undefined\":0}","extracted":null,"updatedAt":1747148591578,"status":"success"}); if (typeof __TSR_SSR__ !== 'undefined') __TSR_SSR__.cleanScripts()</script><script class='tsr-once'>__TSR_SSR__.dehydrated = "{\"manifest\":{\"routes\":{\"__root__\":{\"preloads\":[\"/_build/assets/client-D3P5Nom6.js\",\"/_build/assets/client-CJnX4qAx.js\"],\"assets\":[{\"tag\":\"script\",\"attrs\":{\"type\":\"module\",\"suppressHydrationWarning\":true,\"async\":true},\"children\":\"import(\\\"/_build/assets/client-D3P5Nom6.js\\\")\"}]},\"/\":{\"preloads\":{\"$undefined\":0},\"assets\":{\"$undefined\":0}},\"/configurations/\":{\"preloads\":{\"$undefined\":0},\"assets\":{\"$undefined\":0}},\"/exampleLink/\":{\"preloads\":{\"$undefined\":0},\"assets\":{\"$undefined\":0}},\"/deployment/$owner/$name\":{\"preloads\":{\"$undefined\":0},\"assets\":{\"$undefined\":0}}}},\"dehydratedData\":{\"$undefined\":0}}"; if (typeof __TSR_SSR__ !== 'undefined') __TSR_SSR__.cleanScripts()</script><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>TanStack Start Starter</title><link rel="modulepreload" href="/_build/assets/client-D3P5Nom6.js"/><link rel="modulepreload" href="/_build/assets/client-CJnX4qAx.js"/><link rel="stylesheet" href="/_build/assets/index-DZMNOp_L.css"/><link rel="stylesheet" href="/_build/assets/app-Dmsi9O-l.css"/></head><body style="height:100%;overflow-y:hidden"><script>((e,i,s,u,m,a,l,h)=>{let d=document.documentElement,w=["light","dark"];function p(n){(Array.isArray(e)?e:[e]).forEach(y=>{let k=y==="class",S=k&&a?m.map(f=>a[f]||f):m;k?(d.classList.remove(...S),d.classList.add(a&&a[n]?a[n]:n)):d.setAttribute(y,n)}),R(n)}function R(n){h&&w.includes(n)&&(d.style.colorScheme=n)}function c(){return window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}if(u)p(u);else try{let n=localStorage.getItem(i)||s,y=l&&n==="system"?c():n;p(y)}catch(n){}})("class","xtrahub","system",null,["light","dark"],null,true,true)</script><!--$--><div>Hello!</div><div><a href="/"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 underline-offset-4 hover:underline h-9 text-blue-600 hover:text-blue-400 p-0 cursor-pointer">Back</button></a></div><script></script><script class="tsr-once">(function restoreScroll(storageKey2, key, behavior, shouldScrollRestoration, scrollToTopSelectors) {
+  var _a;
+  let byKey;
+  try {
+    byKey = JSON.parse(sessionStorage.getItem(storageKey2) || "{}");
+  } catch (error) {
+    console.error(error);
+    return;
+  }
+  const resolvedKey = key || ((_a = window.history.state) == null ? void 0 : _a.key);
+  const elementEntries = byKey[resolvedKey];
+  ignoreScroll = true;
+  (() => {
+    if (shouldScrollRestoration && elementEntries) {
+      for (const elementSelector in elementEntries) {
+        const entry = elementEntries[elementSelector];
+        if (elementSelector === "window") {
+          window.scrollTo({
+            top: entry.scrollY,
+            left: entry.scrollX,
+            behavior
+          });
+        } else if (elementSelector) {
+          const element = document.querySelector(elementSelector);
+          if (element) {
+            element.scrollLeft = entry.scrollX;
+            element.scrollTop = entry.scrollY;
+          }
+        }
+      }
+      return;
+    }
+    const hash = window.location.hash.split("#")[1];
+    if (hash) {
+      const hashScrollIntoViewOptions = (window.history.state || {}).__hashScrollIntoViewOptions ?? true;
+      if (hashScrollIntoViewOptions) {
+        const el = document.getElementById(hash);
+        if (el) {
+          el.scrollIntoView(hashScrollIntoViewOptions);
+        }
+      }
+      return;
+    }
+    [
+      "window",
+      ...(scrollToTopSelectors == null ? void 0 : scrollToTopSelectors.filter((d) => d !== "window")) ?? []
+    ].forEach((selector) => {
+      const element = selector === "window" ? window : document.querySelector(selector);
+      if (element) {
+        element.scrollTo({
+          top: 0,
+          left: 0,
+          behavior
+        });
+      }
+    });
+  })();
+  ignoreScroll = false;
+})("tsr-scroll-restoration-v1_3",null, undefined, true)
+if (typeof __TSR_SSR__ !== "undefined") __TSR_SSR__.cleanScripts()</script><!--/$--><script type="module" async="">import("/_build/assets/client-D3P5Nom6.js")</script></body></html>
