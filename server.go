@@ -31,9 +31,49 @@ func getFileSystem(useOS bool) http.FileSystem {
 func main() {
     e := echo.New()
 
+
     // API-Endpunkte
-    e.GET("/api/deployment", func(c echo.Context) error {
+    e.GET("/api/deployment/", func(c echo.Context) error {
         return c.JSON(http.StatusOK, deployments)
+    })
+
+	    e.GET("/api/configuration/", func(c echo.Context) error {
+        return c.JSON(http.StatusOK, configs)
+    })
+
+		    e.GET("/api/settings", func(c echo.Context) error {
+        return c.JSON(http.StatusOK, settings)
+    })
+
+	    e.GET("/api/configuration/:owner", func(c echo.Context) error {
+        owner := c.Param("owner")
+
+        // Filtere die Konfigurationen nach Owner
+        var ownerConfigs []ConfigSource
+        for _, config := range configs {
+            if config.Owner == owner {
+                ownerConfigs = append(ownerConfigs, config)
+            }
+        }
+
+        if len(ownerConfigs) == 0 {
+            return c.JSON(http.StatusNotFound, map[string]string{"message": "No configurations found for owner"})
+        }
+
+        return c.JSON(http.StatusOK, ownerConfigs)
+    })
+
+	    e.GET("/api/template/:id/versions", func(c echo.Context) error {
+        id := c.Param("id")
+
+        // Suche nach dem Template
+        for _, template := range templateVersions {
+            if template.ID == id {
+                return c.JSON(http.StatusOK, template)
+            }
+        }
+
+        return c.JSON(http.StatusNotFound, map[string]string{"message": "Template not found"})
     })
 
     e.GET("/api/deployment/:owner/:name", func(c echo.Context) error {
@@ -48,6 +88,23 @@ func main() {
 
         return c.JSON(http.StatusNotFound, map[string]string{"message": "Deployment not found"})
     })
+
+e.GET("/api/deployment/:owner", func(c echo.Context) error {
+    owner := c.Param("owner")
+
+    var ownerDeployments []Deployment
+    for _, d := range deployments {
+        if d.Owner == owner {
+            ownerDeployments = append(ownerDeployments, d)
+        }
+    }
+
+    if len(ownerDeployments) == 0 {
+        return c.JSON(http.StatusOK, []Deployment{})
+    }
+
+    return c.JSON(http.StatusOK, ownerDeployments)
+})
 
     e.POST("/api/deployment", func(c echo.Context) error {
         newDeployment := Deployment{}
@@ -106,4 +163,4 @@ func main() {
 	e.Logger.Fatal(e.Start(":1323"))
 }
 
-// starten mit go run server.go live 
+// starten mit go run server.go mockData.go live
